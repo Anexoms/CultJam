@@ -1,5 +1,24 @@
 extends Control
 
+class UpgradeData:
+	var name: String
+	var cost: float
+	var effect: float
+	var effect_type: String
+	var description: String
+	var icon_path: String
+	var on_activate: Callable
+
+	func _init(name, cost, effect, effect_type, description, icon_path, on_activate):
+		self.name = name
+		self.cost = cost
+		self.effect = effect
+		self.effect_type = effect_type
+		self.description = description
+		self.icon_path = icon_path
+		self.on_activate = on_activate
+
+
 var faith = 0
 var faith_per_click = 1
 var faith_per_second = 0
