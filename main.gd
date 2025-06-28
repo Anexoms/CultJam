@@ -45,10 +45,10 @@ const UPGRADE2_REWARD = 1
 @onready var upgrade2CostLabel = $TextureRect/Upgrade2/Cost
 @onready var upgrade2RewardLabel = $TextureRect/Upgrade2/Reward
 
-@onready var shop_toggle_button = $ShopToggleButton
-@onready var shop_panel = $TextureRect
-@onready var close_button = $TextureRect/CloseButton
-@onready var shop_list = $TextureRect/ShopList
+@onready var shop_toggle_button = $TextureRect/ShopToggleButton
+@onready var shop_panel = $ShopTexture
+@onready var close_button = $ShopTexture/CloseButton
+@onready var shop_list = $ShopTexture/ShopList
 
 
 func _ready():
@@ -63,15 +63,16 @@ func _ready():
 	close_button.pressed.connect(hide_shop)
 
 	upgrades = [
-		UpgradeData.new("Recruit Follower", 10, 0.1, "fps", "Converts barista", "", func(): add_fps(0.1)),
-		UpgradeData.new("Propaganda Leaflets", 50, 1, "fpc", "Poorly xeroxed", "", func(): add_fpc(1)),
+		UpgradeData.new("Recruit Follower", 10, 0.1, "fps", "Converts barista", "res://assets/sprites/cultist.png", func(): add_fps(0.1)),
+		UpgradeData.new("Propaganda Leaflets", 50, 1, "fpc", "Poorly xeroxed", "res://assets/sprites/brainwash.png", func(): add_fpc(1)),
 		UpgradeData.new("Blood Ritual", 200, 2, "fps", "Faith is thicker than blood", "", func(): add_fps(2)),
-		UpgradeData.new("Dark Sermons", 500, 5, "fpc", "Void gospel", "", func(): add_fpc(5)),
+		UpgradeData.new("Dark Sermons", 500, 5, "fpc", "Void gospel", "res://assets/sprites/ritual.jpg", func(): add_fpc(5)),
 		UpgradeData.new("Hooded Acolytes", 1000, 10, "fps", "Creepy but efficient", "", func(): add_fps(10)),
-		UpgradeData.new("Mind Control", 5000, 50, "fps", "Tune in...", "", func(): add_fps(50)),
-		UpgradeData.new("Summon Demon", 10000, 100, "fpc", "Recruiter demon", "", func(): add_fpc(100)),
+		UpgradeData.new("Mind Control", 5000, 50, "fps", "Tune in...", "res:://assets/sprites/cosmic_horror.jpg", func(): add_fps(50)),
+		UpgradeData.new("Summon Demon", 10000, 100, "fpc", "Recruiter demon", "res://assets/sprites/demon.png", func(): add_fpc(100)),
 		UpgradeData.new("The Ascension", 50000, 0, "end", "Become All-Eye", "", func(): trigger_ending()),
 	]
+	create_shop_items()
 
 func _process(delta):
 	faith += faith_per_second * delta
@@ -156,22 +157,28 @@ func add_fpc(amount: float):
 func create_shop_items():
 	for upgrade in upgrades:
 		var hbox = HBoxContainer.new()
-		hbox.custom_minimum_size = Vector2(0, 40)
+		hbox.custom_minimum_size = Vector2(10, 40)
 
 		var icon = TextureRect.new()
-		icon.texture = load(upgrade.icon_path)
+		var tex = load(upgrade.icon_path)
+		if tex == null:
+			push_error("Missing icon: %s" % upgrade.icon_path)
+		icon.texture = tex
 		icon.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
-		icon.custom_min_size = Vector2(32, 32)
+		icon.custom_minimum_size = Vector2(32, 32)
+		icon.size_flags_horizontal = Control.SIZE_SHRINK_CENTER
 		hbox.add_child(icon)
 
 		var label = Label.new()
 		label.text = "%s (%d) - %s" % [upgrade.name, int(upgrade.cost), upgrade.effect_type.to_upper()]
 		label.tooltip_text = upgrade.description
-		label.custom_min_size = Vector2(200, 0)
+		label.custom_minimum_size = Vector2(200, 0)
+		label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 		hbox.add_child(label)
 
 		var button = Button.new()
 		button.text = "Buy"
+		button.size_flags_horizontal = Control.SIZE_FILL
 		button.pressed.connect(func():
 			if faith >= upgrade.cost:
 				faith -= upgrade.cost
