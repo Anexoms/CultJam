@@ -1,9 +1,45 @@
-[gd_scene load_steps=5 format=3 uid="uid://c4lfd7lnr0f41"]
+[gd_scene load_steps=17 format=3 uid="uid://c4lfd7lnr0f41"]
 
 [ext_resource type="Script" uid="uid://h7avtd5pddb4" path="res://main.gd" id="1_ig7tw"]
 [ext_resource type="Texture2D" uid="uid://clxruom1as7c7" path="res://assets/sprites/background2.webp" id="2_1bvp3"]
 [ext_resource type="FontFile" uid="uid://csjxnrlec3bxj" path="res://assets/fonts/MedievalSharp-Regular.ttf" id="3_lquwl"]
 [ext_resource type="Texture2D" uid="uid://ckvjimbb5j62t" path="res://assets/sprites/ritual.jpg" id="4_7mycd"]
+[ext_resource type="Texture2D" uid="uid://c1wl5nnos7drm" path="res://assets/sprites/StudyReligion.png" id="5_lquwl"]
+[ext_resource type="Texture2D" uid="uid://ckyjlb6ss1iua" path="res://assets/sprites/HirePriest.png" id="6_7mycd"]
+[ext_resource type="Texture2D" uid="uid://bxc6ec68wvyqd" path="res://assets/sprites/Propaganda.png" id="7_272bh"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_7mycd"]
+texture = ExtResource("5_lquwl")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_272bh"]
+texture = ExtResource("5_lquwl")
+modulate_color = Color(0.666569, 0.666569, 0.666569, 1)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_lquwl"]
+texture = ExtResource("5_lquwl")
+modulate_color = Color(0.804743, 0.804743, 0.804743, 1)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_5vw27"]
+texture = ExtResource("6_7mycd")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_kek77"]
+texture = ExtResource("6_7mycd")
+modulate_color = Color(0.666667, 0.666667, 0.666667, 1)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_4c57u"]
+texture = ExtResource("6_7mycd")
+modulate_color = Color(0.803922, 0.803922, 0.803922, 1)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_efxa6"]
+texture = ExtResource("7_272bh")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_dg77c"]
+texture = ExtResource("7_272bh")
+modulate_color = Color(0.666667, 0.666667, 0.666667, 1)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ycdy4"]
+texture = ExtResource("7_272bh")
+modulate_color = Color(0.803922, 0.803922, 0.803922, 1)
 
 [node name="Main" type="Control"]
 layout_mode = 3
@@ -69,6 +105,9 @@ offset_left = 282.0
 offset_top = -1.0
 offset_right = 466.0
 offset_bottom = 45.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_lquwl")
 theme_override_font_sizes/font_size = 18
 text = "fpc: 1"
 horizontal_alignment = 1
@@ -80,6 +119,9 @@ offset_left = 649.0
 offset_top = -1.0
 offset_right = 833.0
 offset_bottom = 45.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_lquwl")
 theme_override_font_sizes/font_size = 18
 text = "fps: 0"
 horizontal_alignment = 1
@@ -91,6 +133,9 @@ offset_left = 121.0
 offset_top = 56.0
 offset_right = 1055.0
 offset_bottom = 102.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_lquwl")
 theme_override_font_sizes/font_size = 25
 text = "     Upgrade:                                       Cost:                                 Reward:"
 horizontal_alignment = 1
@@ -102,11 +147,17 @@ anchors_preset = -1
 anchor_right = 0.022
 anchor_bottom = 0.034
 offset_left = 120.0
-offset_top = 120.0
+offset_top = 100.0
 offset_right = 355.382
-offset_bottom = 147.516
+offset_bottom = 169.516
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("3_lquwl")
 theme_override_font_sizes/font_size = 24
-text = "Study religion"
+theme_override_styles/hover = SubResource("StyleBoxTexture_7mycd")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_272bh")
+theme_override_styles/normal = SubResource("StyleBoxTexture_lquwl")
+text = "Study Religion"
 
 [node name="Cost" type="Label" parent="TextureRect/Upgrade1"]
 layout_mode = 1
@@ -117,6 +168,9 @@ offset_left = 400.0
 offset_top = -3.0
 offset_right = -343.693
 offset_bottom = -2.69701
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_lquwl")
 theme_override_font_sizes/font_size = 27
 text = "10 Faith"
 horizontal_alignment = 1
@@ -131,6 +185,9 @@ offset_left = 700.0
 offset_top = -6.0
 offset_right = -43.693
 offset_bottom = -5.69701
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_lquwl")
 theme_override_font_sizes/font_size = 27
 text = "+ 1 fpc"
 horizontal_alignment = 1
@@ -144,8 +201,14 @@ anchor_bottom = 0.034
 offset_left = 120.0
 offset_top = 200.0
 offset_right = 355.382
-offset_bottom = 227.516
+offset_bottom = 269.516
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("3_lquwl")
 theme_override_font_sizes/font_size = 24
+theme_override_styles/hover = SubResource("StyleBoxTexture_5vw27")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_kek77")
+theme_override_styles/normal = SubResource("StyleBoxTexture_4c57u")
 text = "Hire Priest"
 
 [node name="Cost" type="Label" parent="TextureRect/Upgrade2"]
@@ -157,6 +220,9 @@ offset_left = 400.0
 offset_top = -3.0
 offset_right = -343.693
 offset_bottom = -2.69701
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_lquwl")
 theme_override_font_sizes/font_size = 27
 text = "10 fpc"
 horizontal_alignment = 1
@@ -171,7 +237,62 @@ offset_left = 700.0
 offset_top = -6.0
 offset_right = -43.693
 offset_bottom = -5.69701
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_lquwl")
 theme_override_font_sizes/font_size = 27
 text = "+ 1 fps"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Upgrade3" type="Button" parent="TextureRect"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 0.022
+anchor_bottom = 0.034
+offset_left = 120.0
+offset_top = 300.0
+offset_right = 355.382
+offset_bottom = 369.516
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("3_lquwl")
+theme_override_font_sizes/font_size = 24
+theme_override_styles/hover = SubResource("StyleBoxTexture_efxa6")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_dg77c")
+theme_override_styles/normal = SubResource("StyleBoxTexture_ycdy4")
+text = "setup Propaganda"
+
+[node name="Cost" type="Label" parent="TextureRect/Upgrade3"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 3.725
+anchor_bottom = 0.975
+offset_left = 400.0
+offset_top = -3.0
+offset_right = -343.693
+offset_bottom = -2.69701
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_lquwl")
+theme_override_font_sizes/font_size = 27
+text = "10 fps"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Reward" type="Label" parent="TextureRect/Upgrade3"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 3.725
+anchor_bottom = 0.975
+offset_left = 700.0
+offset_top = -6.0
+offset_right = -43.693
+offset_bottom = -5.69701
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_lquwl")
+theme_override_font_sizes/font_size = 27
+text = "+ 1 fps per Priest"
 horizontal_alignment = 1
 vertical_alignment = 1
