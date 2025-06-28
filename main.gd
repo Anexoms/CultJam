@@ -3,10 +3,13 @@ extends Control
 var faith = 0
 var faith_per_click = 1
 var faith_per_second = 0
+var followers_will = 100
+var followers = 0
 
 @onready var faith_label = $FaithLabel
 @onready var faith_button = $FaithButton
 
+@onready var back = $back1
 @onready var fpc = $TextureRect/fpc
 @onready var fps = $TextureRect/fps
 
@@ -28,6 +31,21 @@ func _ready():
 	update_faith_label()
 	update_upg1_label()
 	update_upg2_label()
+
+func _process(delta):
+	faith += faith_per_second * delta
+	update_global_infos()
+	update_faith_label()
+	if (followers_will <= faith):
+		for i in range(0, 5):
+			spawn_sprite()
+			followers += 1
+		followers_will += 500
+	if (followers_will - 500 >= faith && followers != 0):
+		for i in range(0, 5):
+			back.remove_child(back.get_child(0))
+			followers -= 1
+		followers_will -= 500
 
 func upgrade1_pressed():
 	if (faith >= upgrade1_cost):
@@ -51,14 +69,8 @@ func update_upg2_label():
 	upgrade2CostLabel.text = str(floor(upgrade2_cost)) + " fpc"
 	upgrade2RewardLabel.text = "+ " + str(floor(upgrade2_cost / 4 + 1)) + " fps"
 
-
 func _FaithButton_pressed():
 	faith += faith_per_click
-	update_faith_label()
-
-func _process(delta):
-	faith += faith_per_second * delta
-	update_global_infos()
 	update_faith_label()
 
 func update_global_infos():
@@ -67,3 +79,13 @@ func update_global_infos():
 
 func update_faith_label():
 	faith_label.text = "Faith: " + str(floor(faith))
+
+func spawn_sprite():
+	var sprite = Sprite2D.new()
+	sprite.texture = load("res://assets/sprites/cultist.png")
+	sprite.position = Vector2(
+		randi_range(220,860),
+		randi_range(200, 270)
+	)
+	sprite.scale = Vector2(randf_range(0.4,0.6), randf_range(0.4,0.6))
+	back.add_child(sprite)
