@@ -26,6 +26,8 @@ func _ready():
 	upgrade1_button.pressed.connect(upgrade1_pressed)
 	upgrade2_button.pressed.connect(upgrade2_pressed)
 	update_faith_label()
+	update_upg1_label()
+	update_upg2_label()
 
 func upgrade1_pressed():
 	if (faith >= upgrade1_cost):
@@ -36,7 +38,7 @@ func upgrade1_pressed():
 
 func update_upg1_label():
 	upgrade1CostLabel.text = str(floor(upgrade1_cost)) + " Faith"
-	upgrade1RewardLabel.text = "+ " + str(floor(faith_per_click / 2 + 1)) + " fpc"
+	upgrade1RewardLabel.text = "+ " + str(floor(upgrade1_cost / 3 + 1)) + " fpc"
 
 func upgrade2_pressed():
 	if (faith_per_click >= upgrade2_cost):
