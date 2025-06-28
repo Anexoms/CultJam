@@ -24,6 +24,7 @@ var faith_per_click = 1
 var faith_per_second = 0
 var followers_will = 100
 var followers = 0
+var upgrades: Array[UpgradeData] = []
 
 @onready var faith_label = $FaithLabel
 @onready var faith_button = $FaithButton
@@ -47,6 +48,7 @@ const UPGRADE2_REWARD = 1
 @onready var shop_toggle_button = $ShopToggleButton
 @onready var shop_panel = $TextureRect
 @onready var close_button = $TextureRect/CloseButton
+@onready var shop_list = $TextureRect/ShopList
 
 
 func _ready():
@@ -60,6 +62,16 @@ func _ready():
 	shop_panel.visible = false
 	close_button.pressed.connect(hide_shop)
 
+	upgrades = [
+		UpgradeData.new("Recruit Follower", 10, 0.1, "fps", "Converts barista", "", func(): add_fps(0.1)),
+		UpgradeData.new("Propaganda Leaflets", 50, 1, "fpc", "Poorly xeroxed", "", func(): add_fpc(1)),
+		UpgradeData.new("Blood Ritual", 200, 2, "fps", "Faith is thicker than blood", "", func(): add_fps(2)),
+		UpgradeData.new("Dark Sermons", 500, 5, "fpc", "Void gospel", "", func(): add_fpc(5)),
+		UpgradeData.new("Hooded Acolytes", 1000, 10, "fps", "Creepy but efficient", "", func(): add_fps(10)),
+		UpgradeData.new("Mind Control", 5000, 50, "fps", "Tune in...", "", func(): add_fps(50)),
+		UpgradeData.new("Summon Demon", 10000, 100, "fpc", "Recruiter demon", "", func(): add_fpc(100)),
+		UpgradeData.new("The Ascension", 50000, 0, "end", "Become All-Eye", "", func(): trigger_ending()),
+	]
 
 func _process(delta):
 	faith += faith_per_second * delta
@@ -132,3 +144,14 @@ func toggle_shop():
 	
 func hide_shop():
 	shop_panel.visible = false
+
+func add_fps(amount: float):
+	faith_per_second += amount
+	update_global_infos()
+
+func add_fpc(amount: float):
+	faith_per_click += amount
+	update_global_infos()
+
+func trigger_ending():
+	pass
