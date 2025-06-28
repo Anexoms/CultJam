@@ -164,8 +164,10 @@ func create_shop_items():
 		if tex == null:
 			push_error("Missing icon: %s" % upgrade.icon_path)
 		icon.texture = tex
-		icon.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
-		icon.custom_minimum_size = Vector2(32, 32)
+		icon.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+		icon.size_flags_horizontal = Control.SIZE_FILL
+		icon.size_flags_vertical = Control.SIZE_FILL
+		icon.custom_minimum_size = Vector2(64, 64)
 		icon.size_flags_horizontal = Control.SIZE_SHRINK_CENTER
 		hbox.add_child(icon)
 
@@ -185,7 +187,6 @@ func create_shop_items():
 				upgrade.on_activate.call()
 				update_faith_label()
 				update_global_infos()
-				hbox.queue_free()
 		)
 		hbox.add_child(button)
 
