@@ -153,5 +153,37 @@ func add_fpc(amount: float):
 	faith_per_click += amount
 	update_global_infos()
 
+func create_shop_items():
+	for upgrade in upgrades:
+		var hbox = HBoxContainer.new()
+		hbox.custom_minimum_size = Vector2(0, 40)
+
+		var icon = TextureRect.new()
+		icon.texture = load(upgrade.icon_path)
+		icon.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+		icon.custom_min_size = Vector2(32, 32)
+		hbox.add_child(icon)
+
+		var label = Label.new()
+		label.text = "%s (%d) - %s" % [upgrade.name, int(upgrade.cost), upgrade.effect_type.to_upper()]
+		label.tooltip_text = upgrade.description
+		label.custom_min_size = Vector2(200, 0)
+		hbox.add_child(label)
+
+		var button = Button.new()
+		button.text = "Buy"
+		button.pressed.connect(func():
+			if faith >= upgrade.cost:
+				faith -= upgrade.cost
+				upgrade.on_activate.call()
+				update_faith_label()
+				update_global_infos()
+				hbox.queue_free()
+		)
+		hbox.add_child(button)
+
+		shop_list.add_child(hbox)
+
+
 func trigger_ending():
 	pass
