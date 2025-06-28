@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://c4lfd7lnr0f41"]
+[gd_scene load_steps=19 format=3 uid="uid://c4lfd7lnr0f41"]
 
 [ext_resource type="Script" uid="uid://h7avtd5pddb4" path="res://main.gd" id="1_ig7tw"]
 [ext_resource type="Texture2D" uid="uid://clxruom1as7c7" path="res://assets/sprites/background2.webp" id="2_1bvp3"]
@@ -7,7 +7,6 @@
 [ext_resource type="Texture2D" uid="uid://c1wl5nnos7drm" path="res://assets/sprites/StudyReligion.png" id="5_lquwl"]
 [ext_resource type="Texture2D" uid="uid://ckyjlb6ss1iua" path="res://assets/sprites/HirePriest.png" id="6_7mycd"]
 [ext_resource type="Texture2D" uid="uid://bxc6ec68wvyqd" path="res://assets/sprites/Propaganda.png" id="7_272bh"]
-[ext_resource type="Texture2D" uid="uid://dctqnj6y71na8" path="res://assets/sprites/background1.webp" id="8_5vw27"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_7mycd"]
 texture = ExtResource("5_lquwl")
@@ -41,6 +40,14 @@ modulate_color = Color(0.666667, 0.666667, 0.666667, 1)
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ycdy4"]
 texture = ExtResource("7_272bh")
 modulate_color = Color(0.803922, 0.803922, 0.803922, 1)
+
+[sub_resource type="Gradient" id="Gradient_272bh"]
+colors = PackedColorArray(0, 0, 0, 1, 0.87451, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_5vw27"]
+gradient = SubResource("Gradient_272bh")
+fill_from = Vector2(0.490826, 0)
+fill_to = Vector2(0.513761, 1)
 
 [node name="Main" type="Control"]
 layout_mode = 3
@@ -322,7 +329,7 @@ offset_left = 1.0
 offset_top = 354.0
 offset_right = 1121.0
 offset_bottom = 780.0
-texture = ExtResource("8_5vw27")
+texture = SubResource("GradientTexture2D_5vw27")
 expand_mode = 1
 
 [node name="CloseButton" type="Button" parent="ShopTexture"]
@@ -343,9 +350,12 @@ theme_override_fonts/font = ExtResource("3_lquwl")
 theme_override_font_sizes/font_size = 24
 text = "Close Shop"
 
-[node name="ShopList" type="VBoxContainer" parent="ShopTexture"]
+[node name="ScrollContainer" type="ScrollContainer" parent="ShopTexture"]
 layout_mode = 0
-offset_left = 113.0
-offset_top = 66.0
-offset_right = 1024.0
-offset_bottom = 374.0
+offset_left = 374.0
+offset_top = 57.0
+offset_right = 769.0
+offset_bottom = 415.0
+
+[node name="ShopList" type="VBoxContainer" parent="ShopTexture/ScrollContainer"]
+layout_mode = 2

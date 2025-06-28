@@ -48,7 +48,7 @@ const UPGRADE2_REWARD = 1
 @onready var shop_toggle_button = $TextureRect/ShopToggleButton
 @onready var shop_panel = $ShopTexture
 @onready var close_button = $ShopTexture/CloseButton
-@onready var shop_list = $ShopTexture/ShopList
+@onready var shop_list = $ShopTexture/ScrollContainer/ShopList
 
 
 func _ready():
