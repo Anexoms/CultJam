@@ -25,6 +25,10 @@ const UPGRADE2_REWARD = 1
 @onready var upgrade2CostLabel = $TextureRect/Upgrade2/Cost
 @onready var upgrade2RewardLabel = $TextureRect/Upgrade2/Reward
 
+@onready var shop_toggle_button = $ShopToggleButton
+@onready var shop_panel = $TextureRect
+@onready var close_button = $TextureRect/CloseButton
+
 
 func _ready():
 	faith_button.pressed.connect(_FaithButton_pressed)
@@ -33,6 +37,9 @@ func _ready():
 	update_faith_label()
 	update_upg1_label()
 	update_upg2_label()
+	shop_toggle_button.pressed.connect(toggle_shop)
+	shop_panel.visible = false
+	close_button.pressed.connect(hide_shop)
 
 
 func _process(delta):
@@ -100,3 +107,9 @@ func spawn_sprite():
 	)
 	sprite.scale = Vector2(randf_range(0.4, 0.6), randf_range(0.4, 0.6))
 	back.add_child(sprite)
+
+func toggle_shop():
+	shop_panel.visible = !shop_panel.visible
+	
+func hide_shop():
+	shop_panel.visible = false
